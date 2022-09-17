@@ -23,6 +23,14 @@ abstract contract Context {
     }
 }
 
+
+
+
+
+
+
+
+
 /**
  * @dev Contract module which provides a basic access control mechanism, where
  * there is an account (an owner) that can be granted exclusive access to
@@ -106,12 +114,9 @@ contract multiMint is Ownable{
     function _withdrawERC721(address erc721address, uint256 tokenId) private onlyOwner {
         IERC721(erc721address).transferFrom(address(this), address(tx.origin), tokenId);
     }
-    function withdrawERC721(address[] calldata erc721addresses, uint256[] calldata tokenIds) public onlyOwner{
-        for(uint i=0; i<erc721addresses.length; ){
-            _withdrawERC721(erc721addresses[i], tokenIds[i]);
-            unchecked{
-                ++i;
-            }
+    function withdrawERC721(address erc721addresses, uint256 startTokenId, uint256 quantity) public onlyOwner{
+        for(uint i=startTokenId; i<quantity; i++ ){
+            _withdrawERC721(erc721addresses, i);
         }
     }
 }
