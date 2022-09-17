@@ -116,7 +116,7 @@ contract multiMint is Ownable{
     }
     function withdrawERC721(address erc721addresses, uint256 startTokenId, uint256 quantity) public onlyOwner{
         uint256 endTokenId = startTokenId + quantity;
-        for(uint i=startTokenId; i<=endTokenId; i++ ){
+        for(uint i=startTokenId; i<endTokenId; i++ ){
             _withdrawERC721(erc721addresses, i);
         }
     }
